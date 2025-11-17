@@ -1,0 +1,29 @@
+name: CI CD test cours
+
+on:
+  push:
+  pull_request:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+
+      - name: installer node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: installer les dépendances
+        run: npm ci
+      
+      - name: exec test unitaire
+        run: npm test
+
+      - name: lint code
+        run: npm run lint 
+
+  
